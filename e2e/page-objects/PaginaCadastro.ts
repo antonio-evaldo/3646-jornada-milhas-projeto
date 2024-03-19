@@ -1,13 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test";
 import PaginaBaseCadastroEPerfil from "./PaginaBaseCadastroEPerfil";
-import { test as base } from "@playwright/test";
-
-export const test = base.extend<{ paginaCadastro: PaginaCadastro }>({
-  paginaCadastro: async ({ page }, use) => {
-    const paginaLogin = new PaginaCadastro(page);
-    await use(paginaLogin);
-  }
-});
 
 export default class PaginaCadastro extends PaginaBaseCadastroEPerfil {
   private readonly botaoVisitarPaginaCadastro: Locator;

@@ -1,4 +1,4 @@
-import { test } from './page-objects/PaginaCadastro';
+import { test } from './page-objects/fixtures';
 
 test.describe("Página de Cadastro", () => {
   test.beforeEach(async ({ paginaCadastro }) => {

@@ -1,6 +1,10 @@
-import { test } from './page-objects/PaginaLogin';
+import { test } from './page-objects/fixtures';
 
 test.describe("Página de Login", () => {
+  test.beforeEach(async ({ paginaLogin }) => {
+    await paginaLogin.visitar();
+  });
+
   test("Deve conseguir fazer login com email e senha válidos", async ({ paginaLogin }) => {
     await paginaLogin.fazerLogin('antonio.evaldo@alura.com', '123456');
     await paginaLogin.loginFeitoComSucesso();

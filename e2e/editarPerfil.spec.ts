@@ -1,4 +1,4 @@
-import { test } from './page-objects/PaginaPerfil';
+import { test } from './page-objects/fixtures';
 
 test.describe("Página de Perfil", () => {
   test.beforeEach(async ({ paginaLogin, paginaPerfil }) => {
