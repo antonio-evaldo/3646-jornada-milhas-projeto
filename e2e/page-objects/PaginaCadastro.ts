@@ -34,8 +34,14 @@ export default class PaginaCadastro {
     this.inputDataNascimento = page.getByTestId('input-cadastro-data-nascimento');
     this.inputCpf = page.getByTestId('input-cadastro-cpf');
     this.inputCidade = page.getByTestId('input-cadastro-cidade');
-    this.radioGeneroFeminino = page.getByTestId('radio-cadastro-genero-feminino');
-    this.radioGeneroMasculino = page.getByTestId('radio-cadastro-genero-masculino');
+    this.radioGeneroFeminino = page
+      .getByTestId('radio-cadastro-genero-feminino')
+      .getByLabel('Feminino');
+
+    this.radioGeneroMasculino = page
+      .getByTestId('radio-cadastro-genero-masculino')
+      .getByLabel('Masculino');
+
     this.inputTelefone = page.getByTestId('input-cadastro-telefone');
 
     this.inputEstado = page
@@ -46,7 +52,10 @@ export default class PaginaCadastro {
     this.inputSenha = page.getByTestId('input-cadastro-senha');
     this.inputConfirmarEmail = page.getByTestId('input-cadastro-confirmar-email');
     this.inputConfirmarSenha = page.getByTestId('input-cadastro-confirmar-senha');
-    this.checkboxTermos = page.getByTestId('checkbox-cadastro-termos');
+    this.checkboxTermos = page
+      .getByTestId('checkbox-cadastro-termos')
+      .getByLabel('Li e aceito os termos e condições deste cadastro');
+
     this.botaoCadastrar = page.getByTestId('botao-cadastrar');
   }
 
@@ -65,11 +74,11 @@ export default class PaginaCadastro {
   }
 
   async definirGeneroFeminino() {
-    await this.radioGeneroFeminino.click();
+    await this.radioGeneroFeminino.check();
   }
 
   async definirGeneroMasculino() {
-    await this.radioGeneroMasculino.click();
+    await this.radioGeneroMasculino.check();
   }
 
   async definirCPF(cpf: string) {
@@ -93,7 +102,7 @@ export default class PaginaCadastro {
     await this.inputEmail.fill(email);
   }
 
-  async definirConfirmarEmail(email: string) {
+  async confirmarEmail(email: string) {
     await this.inputConfirmarEmail.fill(email);
   }
 
@@ -101,12 +110,12 @@ export default class PaginaCadastro {
     await this.inputSenha.fill(senha);
   }
 
-  async definirConfirmarSenha(senha: string) {
+  async confirmarSenha(senha: string) {
     await this.inputConfirmarSenha.fill(senha);
   }
 
   async confirmarTermos() {
-    await this.checkboxTermos.click();
+    await this.checkboxTermos.check();
   }
 
   async cadastrar() {

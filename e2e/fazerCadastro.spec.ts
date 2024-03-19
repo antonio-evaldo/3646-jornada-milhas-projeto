@@ -14,9 +14,9 @@ test.describe("Página de Cadastro", () => {
     const senha = '1234567';
 
     await paginaCadastro.definirEmail(email);
-    await paginaCadastro.definirConfirmarEmail(email);
+    await paginaCadastro.confirmarEmail(email);
     await paginaCadastro.definirSenha(senha);
-    await paginaCadastro.definirConfirmarSenha(senha);
+    await paginaCadastro.confirmarSenha(senha);
     await paginaCadastro.confirmarTermos();
     await paginaCadastro.cadastrar();
     await paginaCadastro.cadastroFeitoComSucesso();
