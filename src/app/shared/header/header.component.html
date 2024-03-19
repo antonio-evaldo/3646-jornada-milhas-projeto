@@ -14,7 +14,7 @@
         <button mat-stroked-button color="primary" (click)="logout()">SAIR</button>
       </ng-container>
       <ng-template #login>
-        <button routerLink="auth/cadastro" mat-raised-button color="primary">CADASTRE-SE</button>
+        <button routerLink="auth/cadastro" mat-raised-button color="primary" data-testid="botao-visitar-pagina-cadastro">CADASTRE-SE</button>
         <button routerLink="auth/login" mat-stroked-button data-testid="botao-login">LOGIN</button>
       </ng-template>
     </div>

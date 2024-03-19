@@ -19,8 +19,8 @@ export default class PaginaLogin {
   constructor(page: Page) {
     this.page = page;
     this.botaoLogin = page.getByTestId('botao-login');
-    this.inputEmail = page.getByTestId('input-email');
-    this.inputSenha = page.getByTestId('input-senha');
+    this.inputEmail = page.getByTestId('input-login-email');
+    this.inputSenha = page.getByTestId('input-login-senha');
     this.botaoAcessarConta = page.getByTestId('botao-acessar-conta');
   }
 
