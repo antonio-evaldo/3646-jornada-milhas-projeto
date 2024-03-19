@@ -8,7 +8,7 @@
       <button mat-button>Vender milhas</button>
       <button mat-button>Sobre</button>
       <ng-container *ngIf="user$ | async as pessoaUsuaria; else login">
-        <a routerLink="auth/perfil">
+        <a data-testid="header-link-perfil" routerLink="auth/perfil">
           <img src="assets/icones/user.png" alt="Ícone da pessoa usuária">
         </a>
         <button mat-stroked-button color="primary" (click)="logout()">SAIR</button>

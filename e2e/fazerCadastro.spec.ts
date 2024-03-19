@@ -1,6 +1,10 @@
 import { test } from './page-objects/PaginaCadastro';
 
 test.describe("Página de Cadastro", () => {
+  test.beforeEach(async ({ paginaCadastro }) => {
+    await paginaCadastro.visitar();
+  });
+
   test("Deve conseguir fazer cadastro", async ({ paginaCadastro }) => {
     await paginaCadastro.definirNome('Antônio Evaldo');
     await paginaCadastro.definirDataNascimento('10/05/1999'); // corrigir no código Angular
@@ -18,7 +22,7 @@ test.describe("Página de Cadastro", () => {
     await paginaCadastro.definirSenha(senha);
     await paginaCadastro.confirmarSenha(senha);
     await paginaCadastro.confirmarTermos();
-    await paginaCadastro.cadastrar();
+    await paginaCadastro.submeterForm();
     await paginaCadastro.cadastroFeitoComSucesso();
   });
 });
