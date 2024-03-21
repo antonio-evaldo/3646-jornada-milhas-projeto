@@ -1,7 +1,7 @@
 import { Locator, Page } from "@playwright/test";
 
-export default abstract class PaginaBaseCadastroEPerfil {
-  protected readonly page: Page;
+export default class FormBaseCadastroEPerfil {
+  private readonly page: Page;
   private readonly inputNome: Locator;
   private readonly inputDataNascimento: Locator;
   private readonly inputCpf: Locator;

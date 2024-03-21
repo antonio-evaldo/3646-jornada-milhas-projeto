@@ -1,12 +1,17 @@
 import { Locator, Page, expect } from "@playwright/test";
-import PaginaBaseCadastroEPerfil from "./PaginaBaseCadastroEPerfil";
+import FormBaseCadastroEPerfil from "./PaginaBaseCadastroEPerfil";
 
-export default class PaginaCadastro extends PaginaBaseCadastroEPerfil {
+export default class PaginaCadastro {
+  private readonly page: Page;
+  readonly formBase: FormBaseCadastroEPerfil;
+  
   private readonly botaoVisitarPaginaCadastro: Locator;
   private readonly checkboxTermos: Locator;
 
   constructor(page: Page) {
-    super(page);
+    // trazer discussão de escolha herança X composição
+    this.page = page;
+    this.formBase = new FormBaseCadastroEPerfil(page);
 
     this.botaoVisitarPaginaCadastro = page.getByTestId('botao-visitar-pagina-cadastro');
     this.checkboxTermos = page

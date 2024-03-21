@@ -1,11 +1,15 @@
 import { Locator, Page, expect } from "@playwright/test";
-import PaginaBaseCadastroEPerfil from "./PaginaBaseCadastroEPerfil";
+import FormBaseCadastroEPerfil from "./PaginaBaseCadastroEPerfil";
 
-export default class PaginaPerfil extends PaginaBaseCadastroEPerfil {
+export default class PaginaPerfil {
+  private readonly page: Page;
+  readonly formBase: FormBaseCadastroEPerfil;
+  
   private readonly linkPerfil: Locator;
-
+  
   constructor(page: Page) {
-    super(page);
+    this.page = page;
+    this.formBase = new FormBaseCadastroEPerfil(page);
 
     this.linkPerfil = page.getByTestId('header-link-perfil');
   }
