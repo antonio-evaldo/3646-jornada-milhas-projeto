@@ -6,12 +6,14 @@ export default class PaginaPerfil {
   readonly formBase: FormBaseCadastroEPerfil;
   
   private readonly linkPerfil: Locator;
+  private readonly botaoDeslogar: Locator;
   
   constructor(page: Page) {
     this.page = page;
     this.formBase = new FormBaseCadastroEPerfil(page);
 
     this.linkPerfil = page.getByTestId('header-link-perfil');
+    this.botaoDeslogar = page.getByTestId('form-base-botao-deslogar');
   }
 
   async visitar() {
@@ -20,8 +22,8 @@ export default class PaginaPerfil {
     await expect(this.page).toHaveURL('/auth/perfil');
   }
 
-  async atualizar() {
-    // await this.botaoCadastrar.click();
+  async deslogar() {
+    await this.botaoDeslogar.click();
   }
 
   async atualizadoComSucesso() {
