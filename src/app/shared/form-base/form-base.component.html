@@ -30,6 +30,7 @@
                 [matDatepicker]="nascimento"
                 placeholder="Data de Nascimento"
               >
+              <mat-hint>mês/dia/ano</mat-hint>
               <mat-datepicker-toggle matSuffix [for]="nascimento"></mat-datepicker-toggle>
               <mat-datepicker #nascimento></mat-datepicker>
               <mat-error *ngIf="cadastroForm.get('nascimento')?.errors?.['required']">
