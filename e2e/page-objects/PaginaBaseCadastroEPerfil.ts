@@ -1,23 +1,33 @@
-import { Locator, Page } from "@playwright/test";
+import { Locator, Page, expect } from "@playwright/test";
+
+export interface Perfil {
+  nome: string,
+  dataNascimento: string,
+  cpf: string,
+  telefone: string,
+  cidade: string,
+  estado: string,
+  email: string,
+  senha: string,
+}
 
 export default class FormBaseCadastroEPerfil {
-  private readonly page: Page;
   private readonly inputNome: Locator;
   private readonly inputDataNascimento: Locator;
-  private readonly inputCpf: Locator;
-  private readonly inputCidade: Locator;
   private readonly radioGeneroFeminino: Locator;
   private readonly radioGeneroMasculino: Locator;
+  private readonly radioGeneroNaoInformado: Locator;
+  private readonly inputCpf: Locator;
   private readonly inputTelefone: Locator;
+  private readonly inputCidade: Locator;
   private readonly inputEstado: Locator;
   private readonly inputEmail: Locator;
-  private readonly inputSenha: Locator;
   private readonly inputConfirmarEmail: Locator;
+  private readonly inputSenha: Locator;
   private readonly inputConfirmarSenha: Locator;
   private readonly botaoSubmeterForm: Locator;
 
   constructor(page: Page) {
-    this.page = page;
     this.inputNome = page.getByTestId('form-base-input-nome');
     this.inputDataNascimento = page.getByTestId('form-base-input-data-nascimento');
     this.inputCpf = page.getByTestId('form-base-input-cpf');
@@ -29,6 +39,10 @@ export default class FormBaseCadastroEPerfil {
     this.radioGeneroMasculino = page
       .getByTestId('form-base-radio-genero-masculino')
       .getByLabel('Masculino');
+
+    this.radioGeneroNaoInformado = page
+      .getByTestId('form-base-radio-genero-nao-informar')
+      .getByLabel('Prefiro não informar');
 
     this.inputTelefone = page.getByTestId('form-base-input-telefone');
 
@@ -58,6 +72,10 @@ export default class FormBaseCadastroEPerfil {
 
   async definirGeneroMasculino() {
     await this.radioGeneroMasculino.check();
+  }
+
+  async definirGeneroNaoInformado() {
+    await this.radioGeneroNaoInformado.check();
   }
 
   async definirCPF(cpf: string) {
@@ -95,5 +113,27 @@ export default class FormBaseCadastroEPerfil {
 
   async submeterForm() {
     await this.botaoSubmeterForm.click();
+  }
+
+  async dadosEstaoCorretos({ nome, dataNascimento, cpf, telefone, cidade, estado, email }: Perfil) {
+    await expect(this.inputNome).toHaveValue(nome);
+    await expect(this.inputDataNascimento).toHaveValue(dataNascimento);
+    await expect(this.inputCpf).toHaveValue(cpf);
+    await expect(this.inputTelefone).toHaveValue(telefone);
+    await expect(this.inputCidade).toHaveValue(cidade);
+    await expect(this.inputEstado).toHaveValue(estado);
+    await expect(this.inputEmail).toHaveValue(email);
+  }
+  
+  async generoMasculinoEstaMarcado() {
+    await expect(this.radioGeneroMasculino).toBeChecked();
+  }
+
+  async generoFemininoEstaMarcado() {
+    await expect(this.radioGeneroFeminino).toBeChecked();
+  }
+
+  async generoNaoInformadoEstaMarcado() {
+    await expect(this.radioGeneroNaoInformado).toBeChecked();
   }
 }

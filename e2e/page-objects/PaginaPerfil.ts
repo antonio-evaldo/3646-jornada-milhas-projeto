@@ -27,6 +27,6 @@ export default class PaginaPerfil {
   }
 
   async atualizadoComSucesso() {
-    // await expect(this.page).toHaveURL('/auth/login');
+    await expect(this.page).toHaveURL('/home');
   }
 }
