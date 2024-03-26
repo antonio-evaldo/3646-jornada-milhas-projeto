@@ -28,6 +28,6 @@ test.describe("Página de Perfil", () => {
     await paginaPerfil.atualizadoComSucesso();
 
     await paginaPerfil.visitar();
-    await paginaPerfil.formBase.dadosEstaoCorretos(novosDados);  // corrigir exibição da data no código Angular
+    await paginaPerfil.dadosEstaoCorretos(novosDados);  // corrigir exibição da data no código Angular
    });
 });

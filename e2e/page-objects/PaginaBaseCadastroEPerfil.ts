@@ -1,4 +1,4 @@
-import { Locator, Page, expect } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 import { formatarDataParaForm } from "e2e/operacoes/formatacoes";
 
 export enum Genero {
@@ -20,15 +20,15 @@ export interface Perfil {
 }
 
 export default class FormBaseCadastroEPerfil {
-  private readonly inputNome: Locator;
-  private readonly inputDataNascimento: Locator;
-  private readonly radiosGeneros: { [chave in Genero]: Locator };
-  private readonly inputCpf: Locator;
-  private readonly inputTelefone: Locator;
-  private readonly inputCidade: Locator;
-  private readonly inputEstado: Locator;
-  private readonly inputEmail: Locator;
-  private readonly inputConfirmarEmail: Locator;
+  readonly inputNome: Locator;
+  readonly inputDataNascimento: Locator;
+  readonly radiosGeneros: { [chave in Genero]: Locator };
+  readonly inputCpf: Locator;
+  readonly inputTelefone: Locator;
+  readonly inputCidade: Locator;
+  readonly inputEstado: Locator;
+  readonly inputEmail: Locator;
+  readonly inputConfirmarEmail: Locator;
   private readonly inputSenha: Locator;
   private readonly inputConfirmarSenha: Locator;
   private readonly botaoSubmeterForm: Locator;
@@ -120,19 +120,5 @@ export default class FormBaseCadastroEPerfil {
 
   async submeterForm() {
     await this.botaoSubmeterForm.click();
-  }
-
-  async dadosEstaoCorretos({ nome, dataNascimento, genero, cpf, telefone, cidade, estado, email }: Perfil) {
-    const dataNascimentoFormatada = formatarDataParaForm(dataNascimento);
-    const radioGenero = this.radiosGeneros[genero];
-
-    await expect(this.inputNome).toHaveValue(nome);
-    await expect(this.inputDataNascimento).toHaveValue(dataNascimentoFormatada);
-    await expect(radioGenero).toBeChecked();
-    await expect(this.inputCpf).toHaveValue(cpf);
-    await expect(this.inputTelefone).toHaveValue(telefone);
-    await expect(this.inputCidade).toHaveValue(cidade);
-    await expect(this.inputEstado).toHaveValue(estado);
-    await expect(this.inputEmail).toHaveValue(email);
   }
 }
