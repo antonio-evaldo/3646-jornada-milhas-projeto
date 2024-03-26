@@ -1,8 +1,16 @@
 import { Locator, Page, expect } from "@playwright/test";
+import { formatarDataParaForm } from "e2e/operacoes/formatacoes";
+
+export enum Genero {
+  MASCULINO = 'MASCULINO',
+  FEMININO = 'FEMININO',
+  OUTRO = 'OUTRO',
+}
 
 export interface Perfil {
   nome: string,
-  dataNascimento: string,
+  dataNascimento: Date,
+  genero: Genero;
   cpf: string,
   telefone: string,
   cidade: string,
@@ -14,9 +22,7 @@ export interface Perfil {
 export default class FormBaseCadastroEPerfil {
   private readonly inputNome: Locator;
   private readonly inputDataNascimento: Locator;
-  private readonly radioGeneroFeminino: Locator;
-  private readonly radioGeneroMasculino: Locator;
-  private readonly radioGeneroNaoInformado: Locator;
+  private readonly radiosGeneros: { [chave in Genero]: Locator };
   private readonly inputCpf: Locator;
   private readonly inputTelefone: Locator;
   private readonly inputCidade: Locator;
@@ -32,17 +38,24 @@ export default class FormBaseCadastroEPerfil {
     this.inputDataNascimento = page.getByTestId('form-base-input-data-nascimento');
     this.inputCpf = page.getByTestId('form-base-input-cpf');
     this.inputCidade = page.getByTestId('form-base-input-cidade');
-    this.radioGeneroFeminino = page
+
+    const radioGeneroFeminino = page
       .getByTestId('form-base-radio-genero-feminino')
       .getByLabel('Feminino');
 
-    this.radioGeneroMasculino = page
+    const radioGeneroMasculino = page
       .getByTestId('form-base-radio-genero-masculino')
       .getByLabel('Masculino');
 
-    this.radioGeneroNaoInformado = page
+    const radioGeneroNaoInformado = page
       .getByTestId('form-base-radio-genero-nao-informar')
       .getByLabel('Prefiro não informar');
+
+    this.radiosGeneros = {
+      [Genero.FEMININO]: radioGeneroFeminino,
+      [Genero.MASCULINO]: radioGeneroMasculino,
+      [Genero.OUTRO]: radioGeneroNaoInformado,
+    };
 
     this.inputTelefone = page.getByTestId('form-base-input-telefone');
 
@@ -62,20 +75,14 @@ export default class FormBaseCadastroEPerfil {
     await this.inputNome.fill(nome);
   }
 
-  async definirDataNascimento(dataDigitada: string) {
-    await this.inputDataNascimento.fill(dataDigitada);
+  async definirDataNascimento(data: Date) {
+    const dataFormatada = formatarDataParaForm(data);
+    await this.inputDataNascimento.fill(dataFormatada);
   }
 
-  async definirGeneroFeminino() {
-    await this.radioGeneroFeminino.check();
-  }
-
-  async definirGeneroMasculino() {
-    await this.radioGeneroMasculino.check();
-  }
-
-  async definirGeneroNaoInformado() {
-    await this.radioGeneroNaoInformado.check();
+  async definirGenero(genero: Genero) {
+    const radioGenero = this.radiosGeneros[genero];
+    await radioGenero.check();
   }
 
   async definirCPF(cpf: string) {
@@ -115,25 +122,17 @@ export default class FormBaseCadastroEPerfil {
     await this.botaoSubmeterForm.click();
   }
 
-  async dadosEstaoCorretos({ nome, dataNascimento, cpf, telefone, cidade, estado, email }: Perfil) {
+  async dadosEstaoCorretos({ nome, dataNascimento, genero, cpf, telefone, cidade, estado, email }: Perfil) {
+    const dataNascimentoFormatada = formatarDataParaForm(dataNascimento);
+    const radioGenero = this.radiosGeneros[genero];
+
     await expect(this.inputNome).toHaveValue(nome);
-    await expect(this.inputDataNascimento).toHaveValue(dataNascimento);
+    await expect(this.inputDataNascimento).toHaveValue(dataNascimentoFormatada);
+    await expect(radioGenero).toBeChecked();
     await expect(this.inputCpf).toHaveValue(cpf);
     await expect(this.inputTelefone).toHaveValue(telefone);
     await expect(this.inputCidade).toHaveValue(cidade);
     await expect(this.inputEstado).toHaveValue(estado);
     await expect(this.inputEmail).toHaveValue(email);
-  }
-  
-  async generoMasculinoEstaMarcado() {
-    await expect(this.radioGeneroMasculino).toBeChecked();
-  }
-
-  async generoFemininoEstaMarcado() {
-    await expect(this.radioGeneroFeminino).toBeChecked();
-  }
-
-  async generoNaoInformadoEstaMarcado() {
-    await expect(this.radioGeneroNaoInformado).toBeChecked();
   }
 }

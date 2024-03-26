@@ -1,31 +1,35 @@
+import { gerarPerfil } from './operacoes/gerarPefil';
+import { Perfil } from './page-objects/PaginaBaseCadastroEPerfil';
 import { test } from './page-objects/fixtures';
 
 test.describe("Página de Cadastro", () => {
   // Variáveis de ambiente para diferentes ambientes (ex: cpf diferente para local e homologação)
   // também pode ser apenas um arquivo que exporta constantes
 
+  let novoUsuario: Perfil;
+
   test.beforeEach(async ({ paginaCadastro }) => {
+    novoUsuario = gerarPerfil();
     await paginaCadastro.visitar();
   });
 
   test("Deve conseguir fazer cadastro", async ({ paginaCadastro }) => {
-    await paginaCadastro.formBase.definirNome('Antônio Evaldo');
-    await paginaCadastro.formBase.definirDataNascimento('10/05/1999'); // corrigir no código Angular
-    await paginaCadastro.formBase.definirGeneroMasculino();
-    await paginaCadastro.formBase.definirCPF('12345678901');
-    await paginaCadastro.formBase.definirTelefone('86912345678');
-    await paginaCadastro.formBase.definirCidade('Teresina');
-    await paginaCadastro.formBase.definirEstado('Piauí');
+    await paginaCadastro.formBase.definirNome(novoUsuario.nome);
+    await paginaCadastro.formBase.definirDataNascimento(novoUsuario.dataNascimento); // corrigir no código Angular
+    await paginaCadastro.formBase.definirCPF(novoUsuario.cpf);
+    await paginaCadastro.formBase.definirTelefone(novoUsuario.telefone);
+    await paginaCadastro.formBase.definirCidade(novoUsuario.cidade);
+    await paginaCadastro.formBase.definirEstado(novoUsuario.estado);
 
-    const email = 'antonio.evaldo@alura.com';
-    const senha = '1234567';
-
-    await paginaCadastro.formBase.definirEmail(email);
-    await paginaCadastro.formBase.confirmarEmail(email);
-    await paginaCadastro.formBase.definirSenha(senha);
-    await paginaCadastro.formBase.confirmarSenha(senha);
+    await paginaCadastro.formBase.definirEmail(novoUsuario.email);
+    await paginaCadastro.formBase.confirmarEmail(novoUsuario.email);
+    await paginaCadastro.formBase.definirSenha(novoUsuario.senha);
+    await paginaCadastro.formBase.confirmarSenha(novoUsuario.senha);
     await paginaCadastro.confirmarTermos();
     await paginaCadastro.formBase.submeterForm();
     await paginaCadastro.cadastroFeitoComSucesso();
+  });
+
+  test("Não deve conseguir fazer cadastro com email duplicado", async ({ paginaCadastro }) => {
   });
 });
