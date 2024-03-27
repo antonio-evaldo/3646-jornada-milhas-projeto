@@ -25,4 +25,9 @@ test.describe("Página de Perfil", () => {
     await paginaPerfil.visitar();
     await paginaPerfil.dadosEstaoCorretos(novosDados);
   });
+
+  test("Deve conseguir fazer logout", async ({ paginaPerfil }) => {
+    await paginaPerfil.deslogar();
+    await paginaPerfil.deslogadoComSucesso();
+  });
 });
