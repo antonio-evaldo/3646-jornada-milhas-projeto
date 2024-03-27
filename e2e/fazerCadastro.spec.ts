@@ -1,5 +1,5 @@
 import { gerarPerfil } from './operacoes/gerarPefil';
-import { Perfil } from './page-objects/PaginaBaseCadastroEPerfil';
+import { Perfil } from './page-objects/FormBaseCadastroEPerfil';
 import test from './page-objects/fixtures';
 
 test.describe("Página de Cadastro", () => {

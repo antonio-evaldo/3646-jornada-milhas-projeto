@@ -1,5 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test";
-import FormBaseCadastroEPerfil, { Perfil } from "./PaginaBaseCadastroEPerfil";
+import FormBaseCadastroEPerfil, { Perfil } from "./FormBaseCadastroEPerfil";
 import { formatarDataParaForm } from "e2e/operacoes/formatacoes";
 
 export default class PaginaPerfil {

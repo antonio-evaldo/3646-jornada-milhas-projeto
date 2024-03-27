@@ -1,4 +1,4 @@
-import { Genero, Perfil } from '../page-objects/PaginaBaseCadastroEPerfil';
+import { Genero, Perfil } from '../page-objects/FormBaseCadastroEPerfil';
 import { faker } from '@faker-js/faker/locale/pt_BR';
 
 export function gerarPerfil(): Perfil {
