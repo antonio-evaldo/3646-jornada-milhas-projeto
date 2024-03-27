@@ -1,5 +1,5 @@
 import { gerarPerfil } from './operacoes/gerarPefil';
-import { test } from './page-objects/fixtures';
+import test from './page-objects/fixtures';
 
 test.describe("Página de Perfil", () => {
   test.beforeEach(async ({ paginaLogin, paginaPerfil }) => {

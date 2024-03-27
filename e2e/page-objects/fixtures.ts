@@ -1,13 +1,18 @@
 import { test as base } from "@playwright/test";
+import PaginaPrincipal from "./PaginaPrincipal";
 import PaginaCadastro from "./PaginaCadastro";
 import PaginaLogin from "./PaginaLogin";
 import PaginaPerfil from "./PaginaPerfil";
 
-export const test = base.extend<{
+const test = base.extend<{
+  paginaPrincipal: PaginaPrincipal,
   paginaCadastro: PaginaCadastro,
   paginaLogin: PaginaLogin,
   paginaPerfil: PaginaPerfil
 }>({
+  paginaPrincipal: async ({ page }, use) => {
+    await use(new PaginaPrincipal(page));
+  },
   paginaCadastro: async ({ page }, use) => {
     await use(new PaginaCadastro(page));
   },
@@ -18,3 +23,5 @@ export const test = base.extend<{
     await use(new PaginaPerfil(page));
   },
 });
+
+export default test;
