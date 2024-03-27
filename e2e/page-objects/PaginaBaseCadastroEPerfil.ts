@@ -118,6 +118,21 @@ export default class FormBaseCadastroEPerfil {
     await this.inputConfirmarSenha.fill(senha);
   }
 
+  async preencherForm(dados: Perfil) {
+    await this.definirNome(dados.nome);
+    await this.definirDataNascimento(dados.dataNascimento);
+    await this.definirGenero(dados.genero);
+    await this.definirCPF(dados.cpf);
+    await this.definirTelefone(dados.telefone);
+    await this.definirCidade(dados.cidade);
+    await this.definirEstado(dados.estado);
+
+    await this.definirEmail(dados.email);
+    await this.confirmarEmail(dados.email);
+    await this.definirSenha(dados.senha);
+    await this.confirmarSenha(dados.senha);
+  }
+
   async submeterForm() {
     await this.botaoSubmeterForm.click();
   }

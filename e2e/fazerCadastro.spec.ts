@@ -13,13 +13,14 @@ test.describe("Página de Cadastro", () => {
   test("Deve conseguir fazer cadastro", async ({ paginaCadastro }) => {
     await paginaCadastro.cadastrarUsuario(novoUsuario);
     await paginaCadastro.cadastroFeitoComSucesso();
-});
+  });
 
   test("Não deve conseguir fazer cadastro com os mesmos dados", async ({ paginaCadastro }) => {
     await paginaCadastro.cadastrarUsuario(novoUsuario);
     await paginaCadastro.cadastroFeitoComSucesso();
+
     await paginaCadastro.visitar();
     await paginaCadastro.cadastrarUsuario(novoUsuario);
-    await paginaCadastro.estaMostrandoDialogDeErro('E-mail já utilizado.');
+    await paginaCadastro.estaMostrandoDialogoDeErro('E-mail já utilizado.');
   });
 });
