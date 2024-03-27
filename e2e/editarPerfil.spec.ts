@@ -2,9 +2,14 @@ import { gerarPerfil } from './operacoes/gerarPefil';
 import test from './page-objects/fixtures';
 
 test.describe("Página de Perfil", () => {
-  test.beforeEach(async ({ paginaLogin, paginaPerfil }) => {
+  test.beforeEach(async ({ paginaCadastro, paginaLogin, paginaPerfil }) => {
+    const novoUsuario = gerarPerfil();
+    await paginaCadastro.visitar();
+    await paginaCadastro.cadastrarUsuario(novoUsuario);
+    await paginaCadastro.cadastroFeitoComSucesso();
+
     await paginaLogin.visitar();
-    await paginaLogin.fazerLogin('antonio.evaldo@alura.com', '1234567');
+    await paginaLogin.fazerLogin(novoUsuario.email, novoUsuario.senha);
     await paginaLogin.loginFeitoComSucesso();
 
     await paginaPerfil.visitar();
@@ -15,6 +20,7 @@ test.describe("Página de Perfil", () => {
 
     await paginaPerfil.formBase.definirNome(novosDados.nome);
     await paginaPerfil.formBase.definirDataNascimento(novosDados.dataNascimento); // corrigir no código Angular
+    await paginaPerfil.formBase.definirGenero(novosDados.genero);
     await paginaPerfil.formBase.definirCPF(novosDados.cpf);
     await paginaPerfil.formBase.definirTelefone(novosDados.telefone);
     await paginaPerfil.formBase.definirCidade(novosDados.cidade);
@@ -28,6 +34,6 @@ test.describe("Página de Perfil", () => {
     await paginaPerfil.atualizadoComSucesso();
 
     await paginaPerfil.visitar();
-    await paginaPerfil.dadosEstaoCorretos(novosDados);  // corrigir exibição da data no código Angular
+    await paginaPerfil.dadosEstaoCorretos(novosDados);
    });
 });
