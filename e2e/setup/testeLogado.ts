@@ -2,17 +2,17 @@ import { expect } from "@playwright/test";
 import * as path from "path";
 import * as fs from "fs";
 
-import { test, Fixtures } from "e2e/setup/fixtures";
+import { test as base, Fixtures } from "e2e/setup/fixtures";
 import PaginaCadastro from "../page-objects/PaginaCadastro";
 import PaginaLogin from "../page-objects/PaginaLogin";
 import { gerarPerfil } from "e2e/operacoes/gerarPefil";
 
-export const testeLogado = test.extend<Fixtures, { workerStorageState: string }>({
+export const testeLogado = base.extend<Fixtures, { workerStorageState: string }>({
   storageState: ({ workerStorageState }, use) => use(workerStorageState),
 
   workerStorageState: [async ({ browser }, use) => {
-    const id = test.info().parallelIndex;
-    const fileName = path.resolve(test.info().project.outputDir, `.auth/${id}.json`);
+    const id = testeLogado.info().parallelIndex;
+    const fileName = path.resolve(testeLogado.info().project.outputDir, `.auth/${id}.json`);
 
     if (fs.existsSync(fileName)) {
       // Reuse existing authentication state if any.
