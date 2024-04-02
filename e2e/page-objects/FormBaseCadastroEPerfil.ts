@@ -136,4 +136,8 @@ export default class FormBaseCadastroEPerfil {
   async submeterForm() {
     await this.botaoSubmeterForm.click();
   }
+
+  async obterValorInputEmail() {
+    return this.inputEmail.inputValue();
+  }
 }

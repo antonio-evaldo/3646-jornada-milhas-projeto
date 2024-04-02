@@ -4,12 +4,14 @@ import PaginaCadastro from "./PaginaCadastro";
 import PaginaLogin from "./PaginaLogin";
 import PaginaPerfil from "./PaginaPerfil";
 
-const test = base.extend<{
+export type Fixtures = {
   paginaPrincipal: PaginaPrincipal,
   paginaCadastro: PaginaCadastro,
   paginaLogin: PaginaLogin,
   paginaPerfil: PaginaPerfil
-}>({
+};
+
+export const test = base.extend<Fixtures>({
   paginaPrincipal: async ({ page }, use) => {
     await use(new PaginaPrincipal(page));
   },
