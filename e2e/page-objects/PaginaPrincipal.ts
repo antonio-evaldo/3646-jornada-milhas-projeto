@@ -8,6 +8,7 @@ export default class PaginaPrincipal {
   private readonly botaoIncrementarAdultos: Locator;
   private readonly botaoIncrementarCriancas: Locator;
   private readonly botaoIncrementarBebes: Locator;
+  private readonly botaoDefinirPassagemExecutiva: Locator;
   private readonly botaoFecharModalPassageiros: Locator;
   private readonly campoDropdownOrigem: Locator;
   private readonly campoDropdownDestino: Locator;
@@ -34,6 +35,7 @@ export default class PaginaPrincipal {
       .getByTestId('seletor-passageiro-bebes')
       .getByRole('button', { name: 'adição' });
 
+    this.botaoDefinirPassagemExecutiva = page.getByTestId('botao-passagem-executiva');
     this.botaoFecharModalPassageiros = page.getByTestId('fechar-modal-passageiros');
 
     this.campoDropdownOrigem = page
@@ -81,6 +83,10 @@ export default class PaginaPrincipal {
     for (let i = 0; i < quantidade; i++) {
       await this.botaoIncrementarBebes.click();
     }
+  }
+
+  async definirPassagemExecutiva() {
+    await this.botaoDefinirPassagemExecutiva.click();
   }
 
   async fecharModalPassageiros() {
