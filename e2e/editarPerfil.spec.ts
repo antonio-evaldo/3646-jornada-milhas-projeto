@@ -8,20 +8,9 @@ testeLogado.describe("Página de Perfil", () => {
 
   testeLogado("Deve conseguir editar o perfil", async ({ paginaPerfil }) => {
     const novosDados = gerarPerfil();
-
-    await paginaPerfil.formBase.definirNome(novosDados.nome);
-    await paginaPerfil.formBase.definirDataNascimento(novosDados.dataNascimento);
-    await paginaPerfil.formBase.definirGenero(novosDados.genero);
-    await paginaPerfil.formBase.definirCPF(novosDados.cpf);
-    await paginaPerfil.formBase.definirTelefone(novosDados.telefone);
-    await paginaPerfil.formBase.definirCidade(novosDados.cidade);
-    await paginaPerfil.formBase.definirEstado(novosDados.estado);
-
     const emailAtual = await paginaPerfil.formBase.obterValorInputEmail();
 
-    await paginaPerfil.formBase.confirmarEmail(emailAtual);
-    await paginaPerfil.formBase.definirSenha(novosDados.senha);
-    await paginaPerfil.formBase.confirmarSenha(novosDados.senha);
+    await paginaPerfil.formBase.preencherForm({ ...novosDados, email: emailAtual });
     await paginaPerfil.formBase.submeterForm();
     await paginaPerfil.atualizadoComSucesso();
 
