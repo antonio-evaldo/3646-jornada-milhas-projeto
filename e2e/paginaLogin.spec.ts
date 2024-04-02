@@ -1,5 +1,5 @@
 import { gerarPerfil } from './operacoes/gerarPefil';
-import test from './page-objects/fixtures';
+import test from './setup/fixtures';
 
 test.describe("Página de Login", () => {
   test("Deve conseguir fazer login com email e senha válidos", async ({ paginaCadastro, paginaLogin }) => {

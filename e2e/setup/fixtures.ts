@@ -1,8 +1,8 @@
 import { test as base } from "@playwright/test";
-import PaginaPrincipal from "./PaginaPrincipal";
-import PaginaCadastro from "./PaginaCadastro";
-import PaginaLogin from "./PaginaLogin";
-import PaginaPerfil from "./PaginaPerfil";
+import PaginaPrincipal from "../page-objects/PaginaPrincipal";
+import PaginaCadastro from "../page-objects/PaginaCadastro";
+import PaginaLogin from "../page-objects/PaginaLogin";
+import PaginaPerfil from "../page-objects/PaginaPerfil";
 
 export type Fixtures = {
   paginaPrincipal: PaginaPrincipal,

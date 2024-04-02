@@ -2,7 +2,7 @@ import { expect } from "@playwright/test";
 import * as path from "path";
 import * as fs from "fs";
 
-import { test, Fixtures } from "e2e/page-objects/fixtures";
+import { test, Fixtures } from "e2e/setup/fixtures";
 import PaginaCadastro from "../page-objects/PaginaCadastro";
 import PaginaLogin from "../page-objects/PaginaLogin";
 import { gerarPerfil } from "e2e/operacoes/gerarPefil";

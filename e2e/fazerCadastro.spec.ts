@@ -1,6 +1,6 @@
 import { gerarPerfil } from './operacoes/gerarPefil';
 import { Perfil } from './page-objects/FormBaseCadastroEPerfil';
-import test from './page-objects/fixtures';
+import test from './setup/fixtures';
 
 test.describe("Página de Cadastro", () => {
   let novoUsuario: Perfil;
