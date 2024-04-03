@@ -23,6 +23,12 @@ test.describe('Jornada de buscar passagens', () => {
 });
 
 test.describe('Mocks das passagens da API', () => {
+  const dataIda = new Date('2025-01-10T00:00:00');
+
+  test.fixme(() => {
+    return new Date().getTime() > dataIda.getTime();
+  }, 'Corrigir data de ida do teste e sobrescrever arquivo HAR');
+
   test('Deve buscar passagem de somente ida, executiva', async ({ page, paginaPrincipal }) => {
     await page.routeFromHAR('e2e/hars/passagens/passagem-ida-executiva/passagem.har', {
       url: '*/**/passagem/search*',
@@ -38,7 +44,6 @@ test.describe('Mocks das passagens da API', () => {
 
     await paginaPrincipal.definirOrigemEDestino('paraíba', 'roraima');
 
-    const dataIda = new Date('2025-01-10T00:00:00');
     await paginaPrincipal.definirDataIda(dataIda);
     await paginaPrincipal.buscarPassagens();
 
@@ -56,7 +61,6 @@ test.describe('Mocks das passagens da API', () => {
 
     await paginaPrincipal.definirOrigemEDestino('paraíba', 'roraima');
 
-    const dataIda = new Date('2025-01-10T00:00:00');
     await paginaPrincipal.definirDataIda(dataIda);
     await paginaPrincipal.buscarPassagens();
 
