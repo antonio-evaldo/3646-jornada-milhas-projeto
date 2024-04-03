@@ -38,7 +38,7 @@ test.describe('Mocks das passagens da API', () => {
 
     await paginaPrincipal.definirOrigemEDestino('paraíba', 'roraima');
 
-    const dataIda = new Date();
+    const dataIda = new Date('2025-01-10T00:00:00');
     await paginaPrincipal.definirDataIda(dataIda);
     await paginaPrincipal.buscarPassagens();
 
@@ -56,7 +56,7 @@ test.describe('Mocks das passagens da API', () => {
 
     await paginaPrincipal.definirOrigemEDestino('paraíba', 'roraima');
 
-    const dataIda = new Date();
+    const dataIda = new Date('2025-01-10T00:00:00');
     await paginaPrincipal.definirDataIda(dataIda);
     await paginaPrincipal.buscarPassagens();
 
