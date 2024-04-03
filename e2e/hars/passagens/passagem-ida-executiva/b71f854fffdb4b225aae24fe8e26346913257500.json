@@ -8,9 +8,9 @@
     {
       "id": 2,
       "tipo": "Executiva",
-      "precoIda": 2800,
+      "precoIda": 4000,
       "precoVolta": 2700,
-      "taxaEmbarque": 175,
+      "taxaEmbarque": 500,
       "conexoes": 2,
       "tempoVoo": 6,
       "origem": {
@@ -32,12 +32,12 @@
       "orcamento": [
         {
           "descricao": "1 adulto, executiva",
-          "preco": 2800,
-          "taxaEmbarque": 175,
-          "total": 2975
+          "preco": 4000,
+          "taxaEmbarque": 500,
+          "total": 4500
         }
       ],
-      "total": 2975
+      "total": 4500
     }
   ]
 }
