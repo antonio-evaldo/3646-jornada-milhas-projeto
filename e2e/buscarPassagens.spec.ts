@@ -27,7 +27,7 @@ test.describe('Mocks das passagens da API', () => {
 
   test.fixme(() => {
     return new Date().getTime() > dataIda.getTime();
-  }, 'Corrigir data de ida do teste e sobrescrever arquivo HAR');
+  }, 'Corrigir datas da viagem e sobrescrever arquivo HAR');
 
   test('Deve buscar passagem de somente ida, executiva', async ({ page, paginaPrincipal }) => {
     await page.routeFromHAR('e2e/hars/passagens/passagem-ida-executiva/passagem.har', {
