@@ -22,7 +22,9 @@ test.describe('Jornada de buscar passagens', () => {
   });
 });
 
-test.describe('Mocks das passagens da API', () => {
+test.describe('Mocks das passagens da API', {
+  tag: '@ci'
+}, () => {
   const dataIda = new Date('2025-01-10T00:00:00');
 
   test.fixme(() => {
