@@ -1,0 +1,43 @@
+{
+  "paginaAtual": "1",
+  "ultimaPagina": 1,
+  "total": 1,
+  "precoMin": 20,
+  "precoMax": 5000,
+  "resultado": [
+    {
+      "id": 2,
+      "tipo": "Executiva",
+      "precoIda": 4000,
+      "precoVolta": 2700,
+      "taxaEmbarque": 500,
+      "conexoes": 2,
+      "tempoVoo": 6,
+      "origem": {
+        "id": 11,
+        "nome": "Paraíba",
+        "sigla": "PB"
+      },
+      "destino": {
+        "id": 19,
+        "nome": "Roraima",
+        "sigla": "RR"
+      },
+      "companhia": {
+        "id": 4,
+        "nome": "Latam"
+      },
+      "dataIda": "2025-01-10T03:00:00.000Z",
+      "dataVolta": null,
+      "orcamento": [
+        {
+          "descricao": "1 adulto, executiva",
+          "preco": 4000,
+          "taxaEmbarque": 500,
+          "total": 4500
+        }
+      ],
+      "total": 4500
+    }
+  ]
+}

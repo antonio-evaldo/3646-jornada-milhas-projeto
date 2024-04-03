@@ -1,13 +1,4 @@
 import { Locator, Page, expect } from "@playwright/test";
-import { test as base } from "@playwright/test";
-
-export const test = base.extend<{ paginaLogin: PaginaLogin }>({
-  paginaLogin: async ({ page }, use) => {
-    const paginaLogin = new PaginaLogin(page);
-    await paginaLogin.visitar();
-    await use(paginaLogin);
-  }
-});
 
 export default class PaginaLogin {
   private readonly page: Page;
@@ -19,8 +10,8 @@ export default class PaginaLogin {
   constructor(page: Page) {
     this.page = page;
     this.botaoLogin = page.getByTestId('botao-login');
-    this.inputEmail = page.getByTestId('input-email');
-    this.inputSenha = page.getByTestId('input-senha');
+    this.inputEmail = page.getByTestId('input-login-email');
+    this.inputSenha = page.getByTestId('input-login-senha');
     this.botaoAcessarConta = page.getByTestId('botao-acessar-conta');
   }
 
