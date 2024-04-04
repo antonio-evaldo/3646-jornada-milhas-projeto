@@ -4,7 +4,7 @@ import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserService } from './user.service';
 
-export interface AuthResponse {
+interface AuthResponse {
   access_token: string;
 }
 

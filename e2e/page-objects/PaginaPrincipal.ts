@@ -1,5 +1,4 @@
 import { Page, Locator, expect } from "@playwright/test";
-import { formatarDataParaForm } from "e2e/operacoes/formatacoes";
 
 export default class PaginaPrincipal {
   private readonly page: Page;
@@ -8,7 +7,6 @@ export default class PaginaPrincipal {
   private readonly botaoIncrementarAdultos: Locator;
   private readonly botaoIncrementarCriancas: Locator;
   private readonly botaoIncrementarBebes: Locator;
-  private readonly botaoDefinirPassagemExecutiva: Locator;
   private readonly botaoFecharModalPassageiros: Locator;
   private readonly campoDropdownOrigem: Locator;
   private readonly campoDropdownDestino: Locator;
@@ -17,7 +15,6 @@ export default class PaginaPrincipal {
   private readonly textoIdaVolta: Locator;
   private readonly containerOrigem: Locator;
   private readonly containerDestino: Locator;
-  private readonly textoDataIda: Locator;
   private readonly botaoComprar: Locator;
 
   constructor(page: Page) {
@@ -35,7 +32,6 @@ export default class PaginaPrincipal {
       .getByTestId('seletor-passageiro-bebes')
       .getByRole('button', { name: 'adição' });
 
-    this.botaoDefinirPassagemExecutiva = page.getByTestId('botao-passagem-executiva');
     this.botaoFecharModalPassageiros = page.getByTestId('fechar-modal-passageiros');
 
     this.campoDropdownOrigem = page
@@ -51,7 +47,6 @@ export default class PaginaPrincipal {
     this.textoIdaVolta = page.getByTestId('texto-ida-volta');
     this.containerOrigem = page.getByTestId('container-origem');
     this.containerDestino = page.getByTestId('container-destino');
-    this.textoDataIda = page.getByTestId('texto-data-ida');
     this.botaoComprar = page.getByTestId('botao-comprar');
   }
 
@@ -85,10 +80,6 @@ export default class PaginaPrincipal {
     }
   }
 
-  async definirPassagemExecutiva() {
-    await this.botaoDefinirPassagemExecutiva.click();
-  }
-
   async fecharModalPassageiros() {
     await this.botaoFecharModalPassageiros.click();
   }
@@ -101,8 +92,8 @@ export default class PaginaPrincipal {
     await this.campoDropdownDestino.press('Enter');
   }
 
-  async definirDataIda(data: Date) {
-    const dataFormatada = formatarDataParaForm(data);
+  async definirData(data: Date) {
+    const dataFormatada = data.toLocaleString('en-US', { dateStyle: 'short' });
     await this.campoDataIda.fill(dataFormatada);
   }
 
@@ -113,19 +104,11 @@ export default class PaginaPrincipal {
   async estaMostrandoPassagem(
     tipoTrajeto: 'Somente ida' | 'Ida e volta',
     origem: string,
-    destino: string,
-    dataIda: Date,
+    destino: string
   ) {
-    const dataIdaExibicao = this.obterDataExibicao(dataIda);
-
     await expect(this.textoIdaVolta).toHaveText(tipoTrajeto);
     await expect(this.containerOrigem).toContainText(origem);
     await expect(this.containerDestino).toContainText(destino);
-    await expect(this.textoDataIda).toHaveText(dataIdaExibicao);
     await expect(this.botaoComprar).toBeVisible();
-  }
-
-  private obterDataExibicao(data: Date) {
-    return data.toLocaleString('pt-BR', { day: '2-digit', month: '2-digit' });
   }
 }

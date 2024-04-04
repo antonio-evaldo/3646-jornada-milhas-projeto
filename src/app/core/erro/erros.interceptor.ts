@@ -19,30 +19,28 @@ export class ErrosInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<HttpErrorResponse>> {
     return next.handle(request).pipe(
-      catchError((errorResponse: HttpErrorResponse) => {
+      catchError((error: HttpErrorResponse) => {
         let errorMessage = 'Ocorreu um erro desconhecido';
 
-        if (errorResponse.error.erro) {
-          // Mensagem de erro personalizada da API
-          errorMessage = errorResponse.error.erro;
-        } else if (errorResponse.error instanceof ErrorEvent) {
+        if (error.error instanceof ErrorEvent) {
           // Erro do lado do cliente, como uma rede interrompida
-          errorMessage = `Erro do cliente: ${errorResponse.error.message}`;
-        } else if (errorResponse.status === 404) {
+          errorMessage = `Erro do cliente: ${error.error.message}`;
+        } else if (error.status === 404) {
           // Recurso não encontrado (erro 404)
           errorMessage = 'Recurso não encontrado';
-        } else if (errorResponse.status === 500) {
+        } else if (error.status === 500) {
           // Erro interno do servidor (erro 500)
           errorMessage = 'Erro interno do servidor';
-        } else if (errorResponse.status === 401) {
+        } else if (error.status === 401) {
           // Não autorizado (erro 401)
           errorMessage = 'Você não está autorizado a acessar este recurso';
         }
+
         // Você pode adicionar mais verificações de erro conforme necessário
 
         // Aqui, você pode tomar a ação adequada para cada tipo de erro, por exemplo, exibir uma mensagem para a pessoa
         this.mensagemService.openMessage(errorMessage);
-        console.error('Erro HTTP:', errorResponse);
+        console.error('Erro HTTP:', error);
         console.error('Mensagem de erro:', errorMessage);
 
         // Lançar o erro novamente para que o componente que fez a chamada também possa tratá-lo
