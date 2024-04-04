@@ -7,7 +7,7 @@
       <section>
         <div class="acoesPerfil" *ngIf="perfilComponent">
           <h2>Dados pessoais</h2>
-          <button (click)="deslogar()" mat-stroked-button color="primary">
+          <button type="button" (click)="deslogar()" mat-stroked-button color="primary">
             <mat-icon>logout</mat-icon>
             DESLOGAR
           </button>
@@ -28,6 +28,7 @@
                 [matDatepicker]="nascimento"
                 placeholder="Data de Nascimento"
               >
+              <mat-hint>mês/dia/ano</mat-hint>
               <mat-datepicker-toggle matSuffix [for]="nascimento"></mat-datepicker-toggle>
               <mat-datepicker #nascimento></mat-datepicker>
               <mat-error *ngIf="cadastroForm.get('nascimento')?.errors?.['required']">
