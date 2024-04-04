@@ -18,7 +18,7 @@ jobs:
         run: npm start
 
   test:
-    needs: rodar-angular-app
+    # needs: rodar-angular-app
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
