@@ -18,24 +18,37 @@ jobs:
   #       run: npm start
 
   test:
-    # needs: rodar-angular-app
-    timeout-minutes: 60
+    timeout-minutes: 10
+
+    strategy:
+      matrix:
+        node-version: [20.9.x]
+
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
-        node-version: lts/*
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Instalar dependências
-      run: npm install
-    - name: Rodar o projeto
-      run: npm start
-    - name: Run Playwright tests
-      run: npx playwright test --grep @ci
+        node-version: ${{ matrix.node-version }}
+    # - name: Install dependencies
+    #   run: npm ci
+    # - name: Install Playwright Browsers
+    #   run: npx playwright install --with-deps
+    # - name: Instalar dependências
+    #   run: npm install
+    # - name: Rodar o projeto
+    #   run: npm start
+    # - name: Run Playwright tests
+    #   run: npx playwright test --grep @ci
+
+    - name: Run and test app
+      # working-directory: packages/client
+      run: |
+        npm clean-install
+        npx playwright install --with-deps
+        npm start &
+        npm run e2e -- --grep @ci
+
     - uses: actions/upload-artifact@v4
       if: always()
       with:
