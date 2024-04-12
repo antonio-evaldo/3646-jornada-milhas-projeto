@@ -49,7 +49,7 @@ export default class PaginaPerfil {
 
   async deslogadoComSucesso() {
     await expect(this.page).toHaveURL('/auth/login');
-    await expect(this.botaoDeslogar).not.toBeVisible();
+    await expect(this.linkPerfil).not.toBeVisible();
     await expect(this.botaoLogin).toHaveText('Login', { ignoreCase: true });
   }
 }
